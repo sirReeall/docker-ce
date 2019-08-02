@@ -30,7 +30,6 @@
     - enable docker
   become: yes
 
-
 - name: create docker group
   group:
     name: docker
