@@ -1,2 +1,16 @@
 ---
 # handlers file for docker
+
+  - name: start docker
+    systemd:
+      name: docker
+      state: started
+    become: yes
+    become_user: root
+
+  - name: enable docker
+    systemd:
+      name: docker
+      enabled: yes
+    become: yes
+    become_user: root

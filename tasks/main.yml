@@ -9,4 +9,36 @@
     - yum-utils
     - device-mapper-persistent-data
     - lvm2
-    
+  become: yes
+
+- name: Add docker repository
+  get_url:
+    url: https://download.docker.com/linux/centos/docker-ce.repo
+    dest: /etc/yum.repos.d/docer-ce.repo
+  become: yes 
+
+- name: Install latest version of docker engine community and containerd
+  yum:
+    name: "{{ docker_packages }}"
+  vars:
+    docker_packages:
+    - docker-ce 
+    - docker-ce-cli 
+    - containerd.io
+  notify:
+    - start docker
+    - enable docker
+  become: yes
+
+
+- name: create docker group
+  group:
+    name: docker
+    state: present
+
+- name: "add current user to docker group. current user is: {{ lookup('env', 'USER') }}" 
+  user:
+    name: "{{ lookup('env', 'USER') }}"
+    groups: docker
+    append: yes
+  become: yes
