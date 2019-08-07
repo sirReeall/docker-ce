@@ -1,2 +1,12 @@
 ---
 # tasks file for docker
+
+- name: Install dependent packages for docker-ce
+  yum: 
+    name: "{{ packages }}"
+  vars:
+    packages:
+    - yum-utils
+    - device-mapper-persistent-data
+    - lvm2
+    
