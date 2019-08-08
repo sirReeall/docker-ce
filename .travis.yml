@@ -8,7 +8,7 @@ services: docker
 
 env:
   global:
-    - ROLE_NAME: docker-ce
+    - ROLE_NAME: docker_ce
   matrix:
     - MOLECULE_DISTRO: centos7
 
@@ -24,6 +24,8 @@ before_script:
   - ls -la
   - mv $ROLE_NAME sirreeall.$ROLE_NAME
   - cd sirreeall.$ROLE_NAME
+  - pwd
+  - ls -la
 
 script:
   # Run tests.
