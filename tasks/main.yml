@@ -2,52 +2,52 @@
 # tasks file for docker
 
 - name: Install dependent packages for docker-ce
-  yum: 
+  yum:
     name: "{{ packages }}"
   vars:
     packages:
-    - yum-utils
-    - device-mapper-persistent-data
-    - lvm2
-  become: yes
+      - yum-utils
+      - device-mapper-persistent-data
+      - lvm2
+  become: true
 
 - name: Add docker repository
   get_url:
     url: https://download.docker.com/linux/centos/docker-ce.repo
     dest: /etc/yum.repos.d/docer-ce.repo
-  become: yes 
+  become: true
 
 - name: Install latest version of docker engine community and containerd
   yum:
     name: "{{ docker_packages }}"
   vars:
     docker_packages:
-    - docker-ce 
-    - docker-ce-cli 
-    - containerd.io
+      - docker-ce
+      - docker-ce-cli
+      - containerd.io
   notify:
     - start docker
     - enable docker
-  become: yes
+  become: true
 
 - name: create docker group
   group:
     name: docker
     state: present
 
-- name: "add current user to docker group. current user is: {{ lookup('env', 'USER') }}" 
+- name: "add current user to docker group. current user is: {{ lookup('env', 'USER') }}"  # yamllint disable-line rule:line-length
   user:
     name: "{{ lookup('env', 'USER') }}"
     groups: docker
-    append: yes
-  become: yes
+    append: true
+  become: true
 
 - name: Install docker-compose
-  get_url: 
-    url: https://github.com/docker/compose/releases/download/{{ docker_compose_version }}/docker-compose-Linux-x86_64
+  get_url:
+    url: https://github.com/docker/compose/releases/download/{{ docker_compose_version }}/docker-compose-Linux-x86_64   # yamllint disable-line rule:line-length
     dest: /usr/local/bin/docker-compose
     mode: 0755
   vars:
     - docker_compose_version: 1.24.1
-  become: yes
+  become: true
   when: install_docker_compose

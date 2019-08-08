@@ -1,6 +1,7 @@
 ---
 # Based on Jeff Geerling's testing
-# For example: https://github.com/geerlingguy/ansible-role-kibana/blob/master/.travis.yml
+# For example:
+# https://github.com/geerlingguy/ansible-role-kibana/blob/master/.travis.yml
 
 language: python
 services: docker
