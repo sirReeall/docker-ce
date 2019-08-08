@@ -4,4 +4,4 @@
   become: true
 
   roles:
-    - role: sirreeall.docker-ce
+    - role: sirreeall.docker_ce
