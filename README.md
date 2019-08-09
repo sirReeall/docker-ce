@@ -1,5 +1,7 @@
-docker-ce
+docker_ce
 =========
+
+[![Build Status](https://travis-ci.org/sirReeall/docker_ce.svg?branch=master)](https://travis-ci.org/sirReeall/docker_ce)
 
 Installs the latest version of docker ce from the docker repository.
 
